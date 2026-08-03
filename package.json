@@ -8,7 +8,9 @@
 		"format": "biome format --write",
 		"check": "biome check",
 		"dev": "vite",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"storybook": "storybook dev -p 6006",
+		"storybook:build": "storybook build"
 	},
 	"dependencies": {
 		"preact": "^10.26.9",
@@ -21,6 +23,16 @@
 		"@types/node": "^22.0.0",
 		"tsx": "^4.23.5",
 		"typescript": "^7.0.2",
-		"vite": "^7.0.4"
+		"vite": "^7.0.4",
+		"storybook": "^10.5.5",
+		"@storybook/preact-vite": "^10.5.5",
+		"@chromatic-com/storybook": "^5.2.1",
+		"@storybook/addon-vitest": "^10.5.5",
+		"@storybook/addon-a11y": "^10.5.5",
+		"@storybook/addon-docs": "^10.5.5",
+		"vitest": "^4.1.10",
+		"playwright": "^1.62.1",
+		"@vitest/browser-playwright": "^4.1.10",
+		"@vitest/coverage-v8": "^4.1.10"
 	}
 }
