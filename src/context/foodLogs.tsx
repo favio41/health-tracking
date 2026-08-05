@@ -9,11 +9,13 @@ const FoodLogsContext = createContext<{
 	foodLogs: FoodLog[];
 	addFoodLog: (log: FoodLog) => void;
 	removeFoodLog: (id: string) => void;
+	updateFoodLog: (log: FoodLog) => void;
 	importFoodLogBatch: (logs: unknown[]) => ImportResult;
 }>({
 	foodLogs: [],
 	addFoodLog: () => {},
 	removeFoodLog: () => {},
+	updateFoodLog: () => {},
 	importFoodLogBatch: () => ({ imported: 0, failed: 0, skipped: 0 }),
 });
 
@@ -39,6 +41,16 @@ export function FoodLogsProvider({ children }: { children: ComponentChildren }):
 			const index = data.findIndex((log) => log.id === id);
 			if (index !== -1) {
 				data.splice(index, 1);
+			}
+		});
+		setFoodLogs([...db.data]);
+	};
+
+	const updateLog = (log: FoodLog) => {
+		db.update((data) => {
+			const index = data.findIndex((l) => l.id === log.id);
+			if (index !== -1) {
+				data[index] = log;
 			}
 		});
 		setFoodLogs([...db.data]);
@@ -92,7 +104,13 @@ export function FoodLogsProvider({ children }: { children: ComponentChildren }):
 
 	return (
 		<FoodLogsContext.Provider
-			value={{ foodLogs: foodLogs, addFoodLog: addLog, removeFoodLog: removeLog, importFoodLogBatch: importBatch }}
+			value={{
+				foodLogs: foodLogs,
+				addFoodLog: addLog,
+				removeFoodLog: removeLog,
+				updateFoodLog: updateLog,
+				importFoodLogBatch: importBatch,
+			}}
 		>
 			{children}
 		</FoodLogsContext.Provider>

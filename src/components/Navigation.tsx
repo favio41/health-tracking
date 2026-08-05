@@ -1,11 +1,9 @@
-import type { Dispatch, StateUpdater } from 'preact/hooks';
-
 export interface HeaderProps {
-	setFoodLogEntryDialogOpen: Dispatch<StateUpdater<boolean>>;
-	setImportExportDialogOpen: Dispatch<StateUpdater<boolean>>;
+	onAddEntry: () => void;
+	setImportExportDialogOpen: (open: boolean) => void;
 }
 
-export function Navigation({ setFoodLogEntryDialogOpen, setImportExportDialogOpen }: HeaderProps) {
+export function Navigation({ onAddEntry, setImportExportDialogOpen }: HeaderProps) {
 	return (
 		<nav>
 			<ul>
@@ -17,7 +15,7 @@ export function Navigation({ setFoodLogEntryDialogOpen, setImportExportDialogOpe
 			</ul>
 			<ul>
 				<li>
-					<button type="button" onClick={() => setFoodLogEntryDialogOpen(true)}>
+					<button type="button" onClick={onAddEntry}>
 						Add Entry
 					</button>
 				</li>

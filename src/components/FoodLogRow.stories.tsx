@@ -53,6 +53,7 @@ export const Default: Story = {
 	args: {
 		entry: FoodLogModel(new Date('2026-08-03T08:30:00Z'), chickenFood, { unit: 'g', amount: 150 }),
 		onDelete: () => {},
+		onEdit: () => {},
 	},
 };
 
@@ -60,6 +61,7 @@ export const WithMilliliters: Story = {
 	args: {
 		entry: FoodLogModel(new Date('2026-08-03T12:15:00Z'), riceFood, { unit: 'ml', amount: 200 }),
 		onDelete: () => {},
+		onEdit: () => {},
 	},
 };
 
@@ -67,6 +69,7 @@ export const WithCups: Story = {
 	args: {
 		entry: FoodLogModel(new Date('2026-08-03T18:45:00Z'), riceFood, { unit: 'cup', amount: 1 }),
 		onDelete: () => {},
+		onEdit: () => {},
 	},
 };
 
@@ -74,5 +77,6 @@ export const WithOunces: Story = {
 	args: {
 		entry: FoodLogModel(new Date('2026-08-03T20:00:00Z'), chickenFood, { unit: 'oz', amount: 5 }),
 		onDelete: () => {},
+		onEdit: () => {},
 	},
 };
