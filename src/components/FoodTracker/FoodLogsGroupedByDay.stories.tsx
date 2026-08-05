@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/preact-vite';
-import { FoodLogModel } from '../models/foodLog';
+import { FoodLogModel } from '@/models/foodLog';
 import { FoodLogsGroupedByDay } from './FoodLogsGroupedByDay';
 
 const meta = {

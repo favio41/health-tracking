@@ -1,8 +1,9 @@
 import type { JSX } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
-import { useFoods } from '../context/foods';
-import { FoodLogModel } from '../models/foodLog';
-import type { Food, FoodLog, Unit } from '../types';
+import { useFoods } from '@/context/foods';
+import { FoodLogModel } from '@/models/foodLog';
+import type { Food, FoodLog, Unit } from '@/types';
+import { localeISODate } from '@/utils';
 
 export interface FoodLogEntryDialogProps {
 	open: boolean;
@@ -24,7 +25,7 @@ export function FoodLogEntryDialog({ open, entry, onSave, onClose }: FoodLogEntr
 	useEffect(() => {
 		if (entry) {
 			const dt = new Date(entry.datetime);
-			const isoString = dt.toISOString().slice(0, 16);
+			const isoString = localeISODate(dt).slice(0, 16);
 			setDatetime(isoString);
 			setSelectedFood(entry.food);
 			setAmount(entry.amount.amount);
@@ -32,7 +33,9 @@ export function FoodLogEntryDialog({ open, entry, onSave, onClose }: FoodLogEntr
 			setQuery('');
 		} else {
 			const dt = new Date();
-			const isoString = dt.toISOString().slice(0, 16);
+			const offset = dt.getTimezoneOffset() * 60000;
+			const localDt = new Date(dt.getTime() - offset);
+			const isoString = localDt.toISOString().slice(0, 16);
 			setDatetime(isoString);
 			setSelectedFood(null);
 			setAmount(100);
@@ -54,7 +57,13 @@ export function FoodLogEntryDialog({ open, entry, onSave, onClose }: FoodLogEntr
 
 	const matches =
 		query.trim() && !selectedFood
-			? foods.filter((f) => f.name.toLowerCase().includes(query.toLowerCase())).slice(0, 20)
+			? foods
+					.filter((f) => {
+						const foodNameLower = f.name.toLowerCase();
+						const keywords = query.toLowerCase().split(/\s+/);
+						return keywords.every((keyword) => foodNameLower.includes(keyword));
+					})
+					.slice(0, 20)
 			: [];
 
 	const handleSave = () => {

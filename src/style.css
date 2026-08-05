@@ -2,6 +2,10 @@ dialog > article {
 	padding: 30px;
 }
 
+.table-container {
+	overflow-x: auto;
+}
+
 .group-row > td.action > button {
 	background: none;
 	border: none;

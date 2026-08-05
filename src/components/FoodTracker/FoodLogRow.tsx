@@ -1,4 +1,4 @@
-import type { FoodLog } from '../types';
+import type { FoodLog } from '@/types';
 
 export function FoodLogRow({
 	entry,

@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
-import type { FoodLog } from '../types';
-import { aggregateMacronutrients, formatNumber } from '../utils';
+import type { FoodLog } from '@/types';
+import { aggregateMacronutrients, formatNumber } from '@/utils';
 import { FoodLogsGroupedByTime } from './FoodLogsGroupedByTime';
 
 function getDayKey(datetime: Date): string {
@@ -66,9 +66,7 @@ export function FoodLogsGroupedByDay({
 				<table>
 					<thead>
 						<tr>
-							<th style="width: 24px;"></th>
-							<th></th>
-							<th>Time</th>
+							<th colSpan={3}>Time</th>
 							<th>Food</th>
 							<th>Amount</th>
 							<th>Calories</th>

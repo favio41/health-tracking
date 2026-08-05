@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/preact-vite';
-import { FoodLogModel } from '../models/foodLog';
+import { FoodLogModel } from '@/models/foodLog';
 import { FoodLogRow } from './FoodLogRow';
 
 const meta = {
@@ -9,8 +9,7 @@ const meta = {
 		<table>
 			<thead>
 				<tr>
-					<th style="width: 24px;"></th>
-					<th>Time</th>
+					<th colSpan={3}>Time</th>
 					<th>Food</th>
 					<th>Amount</th>
 					<th>Calories</th>

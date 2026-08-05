@@ -31,7 +31,7 @@ export function FoodLogsProvider({ children }: { children: ComponentChildren }):
 
 	const addLog = (log: FoodLog) => {
 		db.update((data) => {
-			data.push(log);
+			data.unshift(log);
 		});
 		setFoodLogs([...db.data]);
 	};

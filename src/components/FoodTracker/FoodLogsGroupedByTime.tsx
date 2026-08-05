@@ -1,7 +1,7 @@
 import { Fragment } from 'preact';
 import { useState } from 'preact/hooks';
-import type { FoodLog } from '../types';
-import { aggregateMacronutrients, formatNumber } from '../utils';
+import type { FoodLog } from '@/types';
+import { aggregateMacronutrients, formatNumber } from '@/utils';
 import { FoodLogRow } from './FoodLogRow';
 
 const MEAL_GROUPS = ['Breakfast', 'Night', 'Brunch / Snack', 'Lunch', 'Snack PM', 'Dinner'] as const;

@@ -10,7 +10,7 @@
 - `index.tsx` — App entry point; renders App with providers and handles SSR
 - `types.ts` — Shared TypeScript types
 - `style.css` — Global styles (PicoCSS framework)
-- `components` - UI components for the food tracker:
+- `components` - UI components for the App (see `components/CLAUDE.md`)
 - `context` - React Context providers for shared state:
 - `models` - Data models and business logic:
 - `utils` - Utility functions:

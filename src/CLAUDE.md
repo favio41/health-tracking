@@ -2,12 +2,8 @@
 
 ### `src/components/`
 UI components for the food tracker:
-- `TopMenu.tsx` — Header with menu actions
-- `FoodLogsGroupedByDay.tsx` — Main view: displays food logs organized by date
-- `FoodLogsGroupedByTime.tsx` — Alternative grouping by meal time
-- `FoodLogRow.tsx` — Single food log entry row
-- `FoodLogEntryDialog.tsx` — Modal for adding/editing food logs
-- `ImportExportDialog.tsx` - Modal for importing/exporting the app's data
+- `Navigation.tsx` — Header with menu actions
+- `FoodTracker/` — FoodTracker feature components (see `FoodTracker/CLAUDE.md`)
 - `*.stories.tsx` — Storybook files for component testing (skip testing)
 
 ### `src/context/`
@@ -23,6 +19,8 @@ Data models and business logic:
 Utility functions:
 - `createDb.ts` — Persistence layer; initializes and manages IndexedDB
 - `aggregateMacronutrients.ts` — Aggregates FoodLog[]
+- `formatNumber.ts` - Returns 2 decimal numbers
+- `localeISODate.ts` - current locale ISO date
 
 ### `src/assets/`
 Static assets (icons, images, etc.)

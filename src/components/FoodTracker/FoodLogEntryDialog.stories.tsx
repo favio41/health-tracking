@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/preact-vite';
 import type { JSX } from 'preact';
-import { FoodsProvider } from '../context/foods';
-import { FoodLogModel } from '../models/foodLog';
+import { FoodsProvider } from '@/context/foods';
+import { FoodLogModel } from '@/models/foodLog';
 import { FoodLogEntryDialog } from './FoodLogEntryDialog';
 
 const meta = {

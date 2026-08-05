@@ -1,5 +1,6 @@
 import type { JSX } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
+import { localeISODate } from '@/utils';
 import { useFoodLogs } from '../context/foodLogs';
 
 export interface ImportExportDialogProps {
@@ -30,7 +31,7 @@ export function ImportExportDialog({ open, onClose }: ImportExportDialogProps): 
 		const url = URL.createObjectURL(dataBlob);
 		const link = document.createElement('a');
 		link.href = url;
-		link.download = `men2_0-app-export-${new Date().toISOString().split('T')[0]}.json`;
+		link.download = `men2_0-app-export-${localeISODate().slice(0, 16)}.json`;
 		link.click();
 		URL.revokeObjectURL(url);
 	};
