@@ -3,6 +3,7 @@ import { hydrate, prerender as ssr } from 'preact-iso';
 import './style.css';
 import { FoodLogEntryDialog } from './components/FoodLogEntryDialog';
 import { FoodLogsGroupedByDay } from './components/FoodLogsGroupedByDay';
+import { ImportExportDialog } from './components/ImportExportDialog';
 import { Navigation } from './components/Navigation';
 import { FoodLogsProvider, useFoodLogs } from './context/foodLogs';
 import { FoodsProvider } from './context/foods';
@@ -10,11 +11,15 @@ import { FoodsProvider } from './context/foods';
 function AppContent() {
 	const { foodLogs, addFoodLog } = useFoodLogs();
 	const [foodLogEntryDialogOpen, setFoodLogEntryDialogOpen] = useState(false);
+	const [importExportDialogOpen, setImportExportDialogOpen] = useState(false);
 
 	return (
 		<>
 			<header>
-				<Navigation setFoodLogEntryDialogOpen={setFoodLogEntryDialogOpen} />
+				<Navigation
+					setFoodLogEntryDialogOpen={setFoodLogEntryDialogOpen}
+					setImportExportDialogOpen={setImportExportDialogOpen}
+				/>
 			</header>
 			<main>
 				{foodLogs.length === 0 ? (
@@ -27,6 +32,7 @@ function AppContent() {
 					onSave={addFoodLog}
 					onClose={() => setFoodLogEntryDialogOpen(false)}
 				/>
+				<ImportExportDialog open={importExportDialogOpen} onClose={() => setImportExportDialogOpen(false)} />
 			</main>
 		</>
 	);

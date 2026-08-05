@@ -69,8 +69,8 @@ export function FoodLogEntryDialog({ open, entry, onSave, onClose }: FoodLogEntr
 		<dialog ref={dialogRef}>
 			<article>
 				<header>
+					<button className="close" type="button" aria-label="Close" onClick={onClose}></button>
 					<h2>{entry ? 'Edit Food' : 'Log Food'}</h2>
-					<button type="button" aria-label="Close" rel="prev" onClick={onClose}></button>
 				</header>
 
 				<fieldset>

@@ -72,10 +72,7 @@ export function FoodLogsGroupedByTime({ foodLogs }: { foodLogs: FoodLog[] }) {
 							<td>{macronutrients.fat}g</td>
 							<td>{macronutrients.carbs}g</td>
 						</tr>
-						{!isCollapsed &&
-							items.map((entry) => (
-								<FoodLogRow key={`${entry.food.id}-${entry.datetime.toISOString()}`} entry={entry} />
-							))}
+						{!isCollapsed && items.map((entry) => <FoodLogRow key={entry.id} entry={entry} />)}
 					</Fragment>
 				);
 			})}

@@ -41,6 +41,10 @@ export function FoodLogsGroupedByDay({ foodLogs }: { foodLogs: FoodLog[] }) {
 		setCollapsedDays(newCollapsed);
 	};
 
+	if (sortedDays.length === 0) {
+		return <p>No food logs found. Start by adding your first entry!</p>;
+	}
+
 	return (
 		<div class="table-container">
 			<table>

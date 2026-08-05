@@ -20,8 +20,15 @@ export interface FoodLogAmount {
 }
 
 export interface FoodLog {
+	id: string;
 	datetime: Date;
 	food: Food;
 	amount: FoodLogAmount;
 	macronutrients: FoodMacronutrients;
+}
+
+export interface ImportResult {
+	imported: number;
+	failed: number;
+	skipped: number;
 }

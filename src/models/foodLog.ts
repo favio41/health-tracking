@@ -10,6 +10,7 @@ const unitConversions: Record<Unit, number> = {
 
 export function FoodLogModel(datetime: Date, food: Food, amount: FoodLogAmount): FoodLog {
 	return {
+		id: crypto.randomUUID(),
 		datetime: datetime,
 		food: food,
 		amount: amount,

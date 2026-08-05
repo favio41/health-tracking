@@ -7,7 +7,7 @@ UI components for the food tracker:
 - `FoodLogsGroupedByTime.tsx` — Alternative grouping by meal time
 - `FoodLogRow.tsx` — Single food log entry row
 - `FoodLogEntryDialog.tsx` — Modal for adding/editing food logs
-- `FoodMacros.tsx` — Displays macro breakdown (protein, carbs, fats)
+- `ImportExportDialog.tsx` - Modal for importing/exporting the app's data
 - `*.stories.tsx` — Storybook files for component testing (skip testing)
 
 ### `src/context/`
