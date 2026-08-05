@@ -42,6 +42,7 @@ export const Default: Story = {
 		],
 		onDelete: () => {},
 		onEdit: () => {},
+		visibilityDays: 2,
 	},
 };
 
@@ -54,6 +55,7 @@ export const SingleDay: Story = {
 		],
 		onDelete: () => {},
 		onEdit: () => {},
+		visibilityDays: 2,
 	},
 };
 
@@ -62,5 +64,26 @@ export const Empty: Story = {
 		foodLogs: [],
 		onDelete: () => {},
 		onEdit: () => {},
+		visibilityDays: 2,
+	},
+};
+
+export const ManyDays: Story = {
+	args: {
+		foodLogs: [
+			FoodLogModel(new Date('2026-08-05T08:30:00Z'), chickenFood, { unit: 'g', amount: 150 }),
+			FoodLogModel(new Date('2026-08-05T12:00:00Z'), riceFood, { unit: 'g', amount: 151 }),
+			FoodLogModel(new Date('2026-08-04T08:00:00Z'), chickenFood, { unit: 'g', amount: 150 }),
+			FoodLogModel(new Date('2026-08-04T12:30:00Z'), riceFood, { unit: 'ml', amount: 300 }),
+			FoodLogModel(new Date('2026-08-03T08:30:00Z'), chickenFood, { unit: 'g', amount: 150 }),
+			FoodLogModel(new Date('2026-08-03T12:00:00Z'), riceFood, { unit: 'g', amount: 151 }),
+			FoodLogModel(new Date('2026-08-03T18:30:00Z'), chickenFood, { unit: 'g', amount: 120 }),
+			FoodLogModel(new Date('2026-08-02T08:00:00Z'), riceFood, { unit: 'ml', amount: 200 }),
+			FoodLogModel(new Date('2026-08-02T13:30:00Z'), chickenFood, { unit: 'cup', amount: 1 }),
+			FoodLogModel(new Date('2026-08-01T19:00:00Z'), riceFood, { unit: 'oz', amount: 5 }),
+		],
+		onDelete: () => {},
+		onEdit: () => {},
+		visibilityDays: 2,
 	},
 };

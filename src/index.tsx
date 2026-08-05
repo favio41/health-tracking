@@ -1,13 +1,13 @@
 import { useState } from 'preact/hooks';
 import { hydrate, prerender as ssr } from 'preact-iso';
 import './style.css';
-import { FoodLogEntryDialog } from './components/FoodLogEntryDialog';
-import { FoodLogsGroupedByDay } from './components/FoodLogsGroupedByDay';
-import { ImportExportDialog } from './components/ImportExportDialog';
-import { Navigation } from './components/Navigation';
-import { FoodLogsProvider, useFoodLogs } from './context/foodLogs';
-import { FoodsProvider } from './context/foods';
-import type { FoodLog } from './types';
+import { FoodLogEntryDialog } from '@/components/FoodLogEntryDialog';
+import { FoodLogsGroupedByDay } from '@/components/FoodLogsGroupedByDay';
+import { ImportExportDialog } from '@/components/ImportExportDialog';
+import { Navigation } from '@/components/Navigation';
+import { FoodLogsProvider, useFoodLogs } from '@/context/foodLogs';
+import { FoodsProvider } from '@/context/foods';
+import type { FoodLog } from '@/types';
 
 function AppContent() {
 	const { foodLogs, addFoodLog, removeFoodLog, updateFoodLog } = useFoodLogs();
@@ -37,6 +37,7 @@ function AppContent() {
 							setEditingEntry(entry);
 							setFoodLogEntryDialogOpen(true);
 						}}
+						visibilityDays={7}
 					/>
 				)}
 				<FoodLogEntryDialog

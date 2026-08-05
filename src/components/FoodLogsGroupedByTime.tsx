@@ -1,7 +1,7 @@
 import { Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 import type { FoodLog } from '../types';
-import { aggregateMacronutrients } from '../utils';
+import { aggregateMacronutrients, formatNumber } from '../utils';
 import { FoodLogRow } from './FoodLogRow';
 
 const MEAL_GROUPS = ['Breakfast', 'Night', 'Brunch / Snack', 'Lunch', 'Snack PM', 'Dinner'] as const;
@@ -27,7 +27,7 @@ export function FoodLogsGroupedByTime({
 	onDelete: (id: string) => void;
 	onEdit: (entry: FoodLog) => void;
 }) {
-	const [collapsedMeals, setCollapsedMeals] = useState<Set<MealGroup>>(new Set());
+	const [collapsedMeals, setCollapsedMeals] = useState<Set<MealGroup>>(() => new Set(MEAL_GROUPS));
 
 	const grouped = foodLogs.reduce(
 		(acc, entry) => {
@@ -72,13 +72,13 @@ export function FoodLogsGroupedByTime({
 							<td>
 								<span class={`group-toggle${isCollapsed ? ' collapsed' : ''}`}>⏷</span>
 							</td>
-							<td colSpan={2} style="text-align: right; font-size: 0.9em; font-weight: normal;">
+							<td colSpan={3} style="text-align: right; font-size: 0.9em; font-weight: normal;">
 								<strong style="font-weight: 600; float: left;">{group}</strong>
 							</td>
 							<td>{macronutrients.calories}kCal</td>
-							<td>{macronutrients.protein}g</td>
-							<td>{macronutrients.fat}g</td>
-							<td>{macronutrients.carbs}g</td>
+							<td>{formatNumber(macronutrients.protein)}g</td>
+							<td>{formatNumber(macronutrients.fat)}g</td>
+							<td>{formatNumber(macronutrients.carbs)}g</td>
 						</tr>
 						{!isCollapsed &&
 							items.map((entry) => <FoodLogRow key={entry.id} entry={entry} onDelete={onDelete} onEdit={onEdit} />)}

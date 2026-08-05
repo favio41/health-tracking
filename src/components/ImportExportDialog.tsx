@@ -48,7 +48,7 @@ export function ImportExportDialog({ open, onClose }: ImportExportDialogProps): 
 			try {
 				const content = event.target?.result as string;
 				const data = JSON.parse(content);
-				if (typeof data === 'object' && data !== null) {
+				if (typeof data !== 'object' || data === null) {
 					throw new Error('Invalid format: expected an object');
 				}
 				if (!Array.isArray(data.foodLogs)) {

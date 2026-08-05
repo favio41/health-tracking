@@ -22,3 +22,4 @@ Tracks food logs, calories, and macronutrients following Alpha Men 2.0 guideline
 - `npm run check` for lint/formatter
 - `npx tsc --noEmit` for typescript issues
 - no manual or visual verifications
+- no git commit, no git add.

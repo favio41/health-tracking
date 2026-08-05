@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 import type { FoodLog } from '../types';
-import { aggregateMacronutrients } from '../utils';
+import { aggregateMacronutrients, formatNumber } from '../utils';
 import { FoodLogsGroupedByTime } from './FoodLogsGroupedByTime';
 
 function getDayKey(datetime: Date): string {
@@ -20,13 +20,13 @@ export function FoodLogsGroupedByDay({
 	foodLogs,
 	onDelete,
 	onEdit,
+	visibilityDays,
 }: {
 	foodLogs: FoodLog[];
 	onDelete: (id: string) => void;
 	onEdit: (entry: FoodLog) => void;
+	visibilityDays: number;
 }) {
-	const [collapsedDays, setCollapsedDays] = useState<Set<string>>(new Set());
-
 	const grouped = foodLogs.reduce(
 		(acc, foodLog) => {
 			const dayKey = getDayKey(foodLog.datetime);
@@ -38,6 +38,13 @@ export function FoodLogsGroupedByDay({
 	);
 
 	const sortedDays = Object.keys(grouped).sort().reverse();
+	const [visibleDayCount, setVisibleDayCount] = useState(visibilityDays);
+	const visibleDays = sortedDays.slice(0, visibleDayCount);
+
+	const [collapsedDays, setCollapsedDays] = useState<Set<string>>(() => {
+		const collapsed = new Set(sortedDays.slice(1));
+		return collapsed;
+	});
 
 	const toggleDay = (dayKey: string) => {
 		const newCollapsed = new Set(collapsedDays);
@@ -54,47 +61,57 @@ export function FoodLogsGroupedByDay({
 	}
 
 	return (
-		<div class="table-container">
-			<table>
-				<thead>
-					<tr>
-						<th style="width: 24px;"></th>
-						<th>Time</th>
-						<th>Food</th>
-						<th>Amount</th>
-						<th>Calories</th>
-						<th>Protein</th>
-						<th>Fat</th>
-						<th>Carbs</th>
-					</tr>
-				</thead>
-				<tbody>
-					{sortedDays.map((dayKey) => {
-						const items = grouped[dayKey];
-						const label = formatDay(dayKey);
-						const isCollapsed = collapsedDays.has(dayKey);
-						const macronutrients = aggregateMacronutrients(items);
+		<>
+			<div class="table-container">
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 24px;"></th>
+							<th></th>
+							<th>Time</th>
+							<th>Food</th>
+							<th>Amount</th>
+							<th>Calories</th>
+							<th>Protein</th>
+							<th>Fat</th>
+							<th>Carbs</th>
+						</tr>
+					</thead>
+					<tbody>
+						{visibleDays.map((dayKey) => {
+							const items = grouped[dayKey];
+							const label = formatDay(dayKey);
+							const isCollapsed = collapsedDays.has(dayKey);
+							const macronutrients = aggregateMacronutrients(items);
 
-						return (
-							<>
-								<tr key={`header-${dayKey}`} class="group-header" onClick={() => toggleDay(dayKey)}>
-									<td>
-										<span class={`group-toggle${isCollapsed ? ' collapsed' : ''}`}>⏷</span>
-									</td>
-									<td colSpan={3} style="text-align: right; font-size: 0.9em; font-weight: normal;">
-										<strong style="font-weight: 600; float: left;">{label}</strong>
-									</td>
-									<td>{macronutrients.calories}kCal</td>
-									<td>{macronutrients.protein}g</td>
-									<td>{macronutrients.fat}g</td>
-									<td>{macronutrients.carbs}g</td>
-								</tr>
-								{!isCollapsed && <FoodLogsGroupedByTime foodLogs={items} onDelete={onDelete} onEdit={onEdit} />}
-							</>
-						);
-					})}
-				</tbody>
-			</table>
-		</div>
+							return (
+								<>
+									<tr key={`header-${dayKey}`} class="group-header" onClick={() => toggleDay(dayKey)}>
+										<td>
+											<span class={`group-toggle${isCollapsed ? ' collapsed' : ''}`}>⏷</span>
+										</td>
+										<td colSpan={4} style="text-align: right; font-size: 0.9em; font-weight: normal;">
+											<strong style="font-weight: 600; float: left;">{label}</strong>
+										</td>
+										<td>{macronutrients.calories}kCal</td>
+										<td>{formatNumber(macronutrients.protein)}g</td>
+										<td>{formatNumber(macronutrients.fat)}g</td>
+										<td>{formatNumber(macronutrients.carbs)}g</td>
+									</tr>
+									{!isCollapsed && <FoodLogsGroupedByTime foodLogs={items} onDelete={onDelete} onEdit={onEdit} />}
+								</>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
+			{visibleDayCount < sortedDays.length && (
+				<div style="text-align: center; margin-top: 1rem;">
+					<button type="button" onClick={() => setVisibleDayCount(visibleDayCount + visibilityDays)}>
+						Load more
+					</button>
+				</div>
+			)}
+		</>
 	);
 }

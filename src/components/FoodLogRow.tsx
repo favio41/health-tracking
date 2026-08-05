@@ -20,6 +20,7 @@ export function FoodLogRow({
 
 	return (
 		<tr class="group-row">
+			<td></td>
 			<td className="action">
 				<button type="button" onClick={() => onEdit(entry)} title="Edit">
 					✎
