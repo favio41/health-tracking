@@ -1,12 +1,22 @@
 import type { FoodLog } from '../types';
 
-export function FoodLogRow({ entry }: { entry: FoodLog }) {
+export function FoodLogRow({ entry, onDelete }: { entry: FoodLog; onDelete: (id: string) => void }) {
 	const { datetime, food, amount, macronutrients } = entry;
 	const time = datetime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
+	const handleDelete = () => {
+		if (window.confirm('Delete this entry?')) {
+			onDelete(entry.id);
+		}
+	};
+
 	return (
 		<tr class="group-row">
-			<td></td>
+			<td>
+				<button className="action" type="button" onClick={handleDelete}>
+					✕
+				</button>
+			</td>
 			<td>{time}</td>
 			<td>{food.name}</td>
 			<td>

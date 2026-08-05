@@ -59,6 +59,7 @@ export const Default: Story = {
 			FoodLogModel(new Date('2026-08-03T16:30:00Z'), riceFood, { unit: 'cup', amount: 1 }),
 			FoodLogModel(new Date('2026-08-03T19:00:00Z'), chickenFood, { unit: 'oz', amount: 5 }),
 		],
+		onDelete: () => {},
 	},
 };
 
@@ -68,11 +69,13 @@ export const PartialDay: Story = {
 			FoodLogModel(new Date('2026-08-03T08:00:00Z'), chickenFood, { unit: 'g', amount: 150 }),
 			FoodLogModel(new Date('2026-08-03T20:30:00Z'), riceFood, { unit: 'ml', amount: 300 }),
 		],
+		onDelete: () => {},
 	},
 };
 
 export const Empty: Story = {
 	args: {
 		foodLogs: [],
+		onDelete: () => {},
 	},
 };

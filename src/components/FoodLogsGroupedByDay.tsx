@@ -16,7 +16,7 @@ function formatDay(dayKey: string): string {
 	return date.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
 }
 
-export function FoodLogsGroupedByDay({ foodLogs }: { foodLogs: FoodLog[] }) {
+export function FoodLogsGroupedByDay({ foodLogs, onDelete }: { foodLogs: FoodLog[]; onDelete: (id: string) => void }) {
 	const [collapsedDays, setCollapsedDays] = useState<Set<string>>(new Set());
 
 	const grouped = foodLogs.reduce(
@@ -81,7 +81,7 @@ export function FoodLogsGroupedByDay({ foodLogs }: { foodLogs: FoodLog[] }) {
 									<td>{macronutrients.fat}g</td>
 									<td>{macronutrients.carbs}g</td>
 								</tr>
-								{!isCollapsed && <FoodLogsGroupedByTime foodLogs={items} />}
+								{!isCollapsed && <FoodLogsGroupedByTime foodLogs={items} onDelete={onDelete} />}
 							</>
 						);
 					})}

@@ -9,7 +9,7 @@ import { FoodLogsProvider, useFoodLogs } from './context/foodLogs';
 import { FoodsProvider } from './context/foods';
 
 function AppContent() {
-	const { foodLogs, addFoodLog } = useFoodLogs();
+	const { foodLogs, addFoodLog, removeFoodLog } = useFoodLogs();
 	const [foodLogEntryDialogOpen, setFoodLogEntryDialogOpen] = useState(false);
 	const [importExportDialogOpen, setImportExportDialogOpen] = useState(false);
 
@@ -25,7 +25,7 @@ function AppContent() {
 				{foodLogs.length === 0 ? (
 					<p>No food logs yet. Start by adding your first meal!</p>
 				) : (
-					<FoodLogsGroupedByDay foodLogs={foodLogs} />
+					<FoodLogsGroupedByDay foodLogs={foodLogs} onDelete={removeFoodLog} />
 				)}
 				<FoodLogEntryDialog
 					open={foodLogEntryDialogOpen}

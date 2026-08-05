@@ -18,7 +18,7 @@ function getMealGroup(datetime: Date): MealGroup {
 	return 'Night';
 }
 
-export function FoodLogsGroupedByTime({ foodLogs }: { foodLogs: FoodLog[] }) {
+export function FoodLogsGroupedByTime({ foodLogs, onDelete }: { foodLogs: FoodLog[]; onDelete: (id: string) => void }) {
 	const [collapsedMeals, setCollapsedMeals] = useState<Set<MealGroup>>(new Set());
 
 	const grouped = foodLogs.reduce(
@@ -72,7 +72,7 @@ export function FoodLogsGroupedByTime({ foodLogs }: { foodLogs: FoodLog[] }) {
 							<td>{macronutrients.fat}g</td>
 							<td>{macronutrients.carbs}g</td>
 						</tr>
-						{!isCollapsed && items.map((entry) => <FoodLogRow key={entry.id} entry={entry} />)}
+						{!isCollapsed && items.map((entry) => <FoodLogRow key={entry.id} entry={entry} onDelete={onDelete} />)}
 					</Fragment>
 				);
 			})}
