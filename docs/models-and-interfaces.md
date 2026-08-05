@@ -1,0 +1,4 @@
+- Food: { source, id, name, calories, protein, fat, carbs, sugar? }
+- FoodLog: created via FoodLogModel(datetime, food, amount) factory, contains macronutrients (computed)
+- FoodLogAmount: { unit: Unit, amount: number }
+- More at `src/types.ts`

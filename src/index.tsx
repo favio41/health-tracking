@@ -1,17 +1,43 @@
+import { useState } from 'preact/hooks';
 import { hydrate, prerender as ssr } from 'preact-iso';
-
 import './style.css';
-import { FoodsProvider, useFoods } from './context/foods';
+import { FoodLogEntryDialog } from './components/FoodLogEntryDialog';
+import { FoodLogsGroupedByDay } from './components/FoodLogsGroupedByDay';
+import { Navigation } from './components/Navigation';
+import { FoodLogsProvider, useFoodLogs } from './context/foodLogs';
+import { FoodsProvider } from './context/foods';
 
 function AppContent() {
-	const data = useFoods();
-	return <div>hi. foods length {data?.length || 0}</div>;
+	const { foodLogs, addFoodLog } = useFoodLogs();
+	const [foodLogEntryDialogOpen, setFoodLogEntryDialogOpen] = useState(false);
+
+	return (
+		<>
+			<header>
+				<Navigation setFoodLogEntryDialogOpen={setFoodLogEntryDialogOpen} />
+			</header>
+			<main>
+				{foodLogs.length === 0 ? (
+					<p>No food logs yet. Start by adding your first meal!</p>
+				) : (
+					<FoodLogsGroupedByDay foodLogs={foodLogs} />
+				)}
+				<FoodLogEntryDialog
+					open={foodLogEntryDialogOpen}
+					onSave={addFoodLog}
+					onClose={() => setFoodLogEntryDialogOpen(false)}
+				/>
+			</main>
+		</>
+	);
 }
 
 export function App() {
 	return (
 		<FoodsProvider>
-			<AppContent />
+			<FoodLogsProvider>
+				<AppContent />
+			</FoodLogsProvider>
 		</FoodsProvider>
 	);
 }

@@ -1,6 +1,7 @@
 {
 	"permissions": {
-		"deny": ["Read(./notes)"]
+		"allow": ["Bash(npm run *)", "Bash(grep *)", "Bash(find *)"],
+		"deny": ["Read(./notes)", "Read(./data)"]
 	},
 	"hooks": {
 		"PostToolUse": [
@@ -9,8 +10,18 @@
 				"hooks": [
 					{
 						"type": "command",
-						"command": "npm run format 2>/dev/null || true",
+						"command": "npm run format",
 						"statusMessage": "Formatting code..."
+					}
+				]
+			},
+			{
+				"matcher": "Write|Edit",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "npx tsc --noEmit",
+						"statusMessage": "Validating TypeScript..."
 					}
 				]
 			}
