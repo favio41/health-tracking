@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { useSettings } from '@/context/settings';
 import { useTrainingScheduleBaseline } from '@/context/training-schedule-baseline';
 import { trainingAndMacronutritionSchedule } from '@/models/trainingAndMacronutritionSchedule';
+import { DayDetailDialog } from './DayDetailDialog';
 import './MonthlyGrid.css';
 import dayjs from 'dayjs';
 import type { ScheduleGrid } from '@/types';
@@ -12,7 +13,7 @@ export function MonthlyGrid() {
 	const { settings } = useSettings();
 	const trainingScheduleBaseline = useTrainingScheduleBaseline();
 	const [trainingSchedule, setTrainingSchedule] = useState<ScheduleGrid[]>([]);
-	// const [schedule, setSchedule] = useState<string[]>([]);
+	const [selectedItem, setSelectedItem] = useState<ScheduleGrid | null>(null);
 
 	useEffect(() => {
 		if (settings.trainingStartDate && trainingScheduleBaseline) {
@@ -22,31 +23,38 @@ export function MonthlyGrid() {
 				trainingScheduleBaseline,
 			});
 			setTrainingSchedule(grid);
-			// const stringified = Object.values(grid).map((scheduleGrid) => JSON.stringify(scheduleGrid, null, 2));
-			// setSchedule(stringified);
 		}
 	}, [settings.trainingStartDate, trainingScheduleBaseline]);
 
 	return (
-		<div class="week-grid">
-			{DAYS_OF_WEEK.map((day) => (
-				<div key={day} class="week-grid-header">
-					{day}
-				</div>
-			))}
-			{trainingSchedule.length > 0 &&
-				trainingSchedule.map((item, index) => (
-					<div
-						key={index}
-						className={`week-grid-cell ${item.status} ${item.training ?? ''} ${dayjs(item.date).isSame(dayjs(), 'day') ? 'TODAY' : ''}`}
-					>
-						<small class="phase" style="text-transform:capitalize">
-							{dayjs(item.date).format('ddd, MMM DD')}
-						</small>
-						<Cell item={item}></Cell>
+		<>
+			<div class="week-grid">
+				{DAYS_OF_WEEK.map((day) => (
+					<div key={day} class="week-grid-header">
+						{day}
 					</div>
 				))}
-		</div>
+				{trainingSchedule.length > 0 &&
+					trainingSchedule.map((item, index) => (
+						<button
+							key={index}
+							type="button"
+							className={`week-grid-cell ${item.status} ${item.training ?? ''} ${dayjs(item.date).isSame(dayjs(), 'day') ? 'TODAY' : ''}`}
+							onClick={() => {
+								if (item.status !== 'BEFORE_START_DATE' && item.status !== 'AFTER_END_DATE') {
+									setSelectedItem(item);
+								}
+							}}
+						>
+							<small class="phase" style="text-transform:capitalize">
+								{dayjs(item.date).format('ddd, MMM DD')}
+							</small>
+							<Cell item={item}></Cell>
+						</button>
+					))}
+			</div>
+			<DayDetailDialog open={selectedItem !== null} item={selectedItem} onClose={() => setSelectedItem(null)} />
+		</>
 	);
 }
 

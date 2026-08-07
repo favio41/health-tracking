@@ -18,6 +18,7 @@
 	min-height: 100px;
 	background-color: var(--pico-element-background-color);
 	text-align: center;
+	cursor: pointer;
 }
 
 .week-grid-cell small.phase {
