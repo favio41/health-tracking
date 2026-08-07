@@ -2,6 +2,8 @@ import type { JSX } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { localeISODate } from '@/utils';
 import { useFoodLogs } from '../context/foodLogs';
+import { useSettings } from '../context/settings';
+import { useTrainingDaysLog } from '../context/trainingDaysLog';
 
 export interface ImportExportDialogProps {
 	open: boolean;
@@ -12,6 +14,8 @@ export function ImportExportDialog({ open, onClose }: ImportExportDialogProps): 
 	const dialogRef = useRef<HTMLDialogElement>(null);
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const { foodLogs, importFoodLogBatch } = useFoodLogs();
+	const { settings, updateSettings } = useSettings();
+	const { trainingDaysLog, addTrainingDayLog } = useTrainingDaysLog();
 	const [importStatus, setImportStatus] = useState<string>('');
 
 	useEffect(() => {
@@ -26,7 +30,7 @@ export function ImportExportDialog({ open, onClose }: ImportExportDialogProps): 
 	}, [open]);
 
 	const handleDownload = () => {
-		const dataStr = JSON.stringify({ foodLogs }, null, 2);
+		const dataStr = JSON.stringify({ foodLogs, settings, trainingDaysLog }, null, 2);
 		const dataBlob = new Blob([dataStr], { type: 'application/json' });
 		const url = URL.createObjectURL(dataBlob);
 		const link = document.createElement('a');
@@ -56,7 +60,21 @@ export function ImportExportDialog({ open, onClose }: ImportExportDialogProps): 
 					throw new Error('Invalid format: expected an array of food logs');
 				}
 				const { imported, failed } = importFoodLogBatch(data.foodLogs);
-				setImportStatus(`Imported ${imported} food logs${failed > 0 ? ` (${failed} failed)` : ''}`);
+				let message = `Imported ${imported} food logs${failed > 0 ? ` (${failed} failed)` : ''}`;
+
+				if (data.settings && typeof data.settings === 'object') {
+					updateSettings(data.settings);
+					message += ', settings restored';
+				}
+
+				if (Array.isArray(data.trainingDaysLog)) {
+					data.trainingDaysLog.forEach((log) => {
+						addTrainingDayLog(log);
+					});
+					message += `, ${data.trainingDaysLog.length} training logs restored`;
+				}
+
+				setImportStatus(message);
 				setTimeout(() => {
 					setImportStatus('');
 					onClose();
@@ -78,14 +96,14 @@ export function ImportExportDialog({ open, onClose }: ImportExportDialogProps): 
 			<article>
 				<header>
 					<button className="close" type="button" aria-label="Close" onClick={onClose}></button>
-					<h2>Export/Import Food Logs</h2>
+					<h2>Export/Import Data</h2>
 				</header>
 
 				<fieldset>
 					<div style="display: flex; flex-direction: column; gap: 1rem;">
 						<div>
 							<h3>Export</h3>
-							<p>Download your food logs as a JSON file.</p>
+							<p>Download your food logs, settings, and training data as a JSON file.</p>
 							<button type="button" onClick={handleDownload} style="width: 100%;">
 								Download JSON
 							</button>
@@ -95,7 +113,7 @@ export function ImportExportDialog({ open, onClose }: ImportExportDialogProps): 
 
 						<div>
 							<h3>Import</h3>
-							<p>Upload a previously exported JSON file to restore your food logs.</p>
+							<p>Upload a previously exported JSON file to restore your food logs, settings, and training data.</p>
 							<button type="button" onClick={handleUploadClick} class="secondary" style="width: 100%;">
 								Upload JSON
 							</button>

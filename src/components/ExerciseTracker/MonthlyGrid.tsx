@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useSettings } from '@/context/settings';
 import { useTrainingScheduleBaseline } from '@/context/training-schedule-baseline';
+import { useTrainingDaysLog } from '@/context/trainingDaysLog';
 import { trainingAndMacronutritionSchedule } from '@/models/trainingAndMacronutritionSchedule';
 import { DayDetailDialog } from './DayDetailDialog';
 import './MonthlyGrid.css';
@@ -11,6 +12,7 @@ const DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 
 export function MonthlyGrid() {
 	const { settings } = useSettings();
+	const { trainingDaysLog } = useTrainingDaysLog();
 	const trainingScheduleBaseline = useTrainingScheduleBaseline();
 	const [trainingSchedule, setTrainingSchedule] = useState<ScheduleGrid[]>([]);
 	const [selectedItem, setSelectedItem] = useState<ScheduleGrid | null>(null);
@@ -19,12 +21,12 @@ export function MonthlyGrid() {
 		if (settings.trainingStartDate && trainingScheduleBaseline) {
 			const grid = trainingAndMacronutritionSchedule({
 				settings,
-				trainingDayLog: [{ id: '1', datetime: new Date('2026-07-31'), type: 'SKIPPED' as const }],
+				trainingDayLog: trainingDaysLog,
 				trainingScheduleBaseline,
 			});
 			setTrainingSchedule(grid);
 		}
-	}, [settings.trainingStartDate, trainingScheduleBaseline]);
+	}, [settings.trainingStartDate, trainingScheduleBaseline, trainingDaysLog]);
 
 	return (
 		<>
