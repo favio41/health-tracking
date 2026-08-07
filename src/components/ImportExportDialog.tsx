@@ -1,5 +1,6 @@
 import type { JSX } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
+import type { TrainingDayLog } from '@/types';
 import { localeISODate } from '@/utils';
 import { useFoodLogs } from '../context/foodLogs';
 import { useSettings } from '../context/settings';
@@ -68,8 +69,8 @@ export function ImportExportDialog({ open, onClose }: ImportExportDialogProps): 
 				}
 
 				if (Array.isArray(data.trainingDaysLog)) {
-					data.trainingDaysLog.forEach((log) => {
-						addTrainingDayLog(log);
+					data.trainingDaysLog.forEach((log: unknown) => {
+						addTrainingDayLog(log as TrainingDayLog);
 					});
 					message += `, ${data.trainingDaysLog.length} training logs restored`;
 				}

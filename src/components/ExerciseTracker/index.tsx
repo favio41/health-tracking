@@ -1,5 +1,5 @@
 import { CalendarCog } from 'lucide-preact';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { useSettings } from '@/context/settings';
 import { MonthlyGrid } from './MonthlyGrid';
 import { TrainingStartDateDialog } from './TrainingStartDateDialog';
@@ -11,6 +11,11 @@ interface ExerciseTrackerProps {
 export function ExerciseTracker({ onAddEntry }: ExerciseTrackerProps) {
 	const { settings } = useSettings();
 	const [isDateDialogOpen, setIsDateDialogOpen] = useState(false);
+	const [showGrid, setShowGrid] = useState(true);
+
+	useEffect(() => {
+		setShowGrid(!!settings.trainingStartDate);
+	}, ['settings']);
 
 	return (
 		<article>
@@ -33,16 +38,22 @@ export function ExerciseTracker({ onAddEntry }: ExerciseTrackerProps) {
 					</li>
 				</ul>
 			</nav>
-			{settings.trainingStartDate ? (
-				<>
-					<p>Training started on {settings.trainingStartDate.toLocaleDateString()}</p>
-					<MonthlyGrid />
-				</>
+			{showGrid ? (
+				<ShowMonthlyGrid settings={settings} />
 			) : (
 				<TrainingDayStartDateEmptyNotice setIsDateDialogOpen={setIsDateDialogOpen} />
 			)}
 			<TrainingStartDateDialog open={isDateDialogOpen} onClose={() => setIsDateDialogOpen(false)} />
 		</article>
+	);
+}
+
+function ShowMonthlyGrid({ settings }: { settings: { trainingStartDate?: Date } }) {
+	return (
+		<div>
+			<p>Training started on {settings.trainingStartDate?.toLocaleDateString()}</p>
+			<MonthlyGrid />
+		</div>
 	);
 }
 
