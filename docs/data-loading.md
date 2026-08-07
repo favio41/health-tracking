@@ -1,2 +1,0 @@
-- **`src/context/foods.tsx`**: `FoodsProvider`, `useFoods()` → `Food[]`. Loads `/foods.json` on mount (~95k USDA entries, uppercase names).
-- **No built-in search** — callers must filter client-side. For UI: substring match on `name.toLowerCase()` is the pattern.

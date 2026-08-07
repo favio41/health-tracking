@@ -75,10 +75,10 @@ export function FoodLogsGroupedByTime({
 							<td colSpan={3} style="text-align: right; font-size: 0.9em; font-weight: normal;">
 								<strong style="font-weight: 600; float: left;">{group}</strong>
 							</td>
-							<td>{macronutrients.calories}kCal</td>
-							<td>{formatNumber(macronutrients.protein)}g</td>
-							<td>{formatNumber(macronutrients.fat)}g</td>
-							<td>{formatNumber(macronutrients.carbs)}g</td>
+							<td className="pl-35">{macronutrients.calories}kCal</td>
+							<td className="pl-35">{formatNumber(macronutrients.protein)}g</td>
+							<td className="pl-35">{formatNumber(macronutrients.fat)}g</td>
+							<td className="pl-35">{formatNumber(macronutrients.carbs)}g</td>
 						</tr>
 						{!isCollapsed &&
 							items.map((entry) => <FoodLogRow key={entry.id} entry={entry} onDelete={onDelete} onEdit={onEdit} />)}

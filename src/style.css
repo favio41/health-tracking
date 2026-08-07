@@ -19,3 +19,16 @@ dialog > article {
 	width: 1.5em;
 	height: 1.5em;
 }
+
+.text-center {
+	text-align: center;
+}
+
+.my-20 {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+
+.pl-35 {
+	padding-left: 35px;
+}

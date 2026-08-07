@@ -1,3 +1,4 @@
+import { User } from 'lucide-preact';
 import { useFoodLogs } from '@/context/foodLogs';
 import type { FoodLog } from '@/types';
 import { FoodLogsGroupedByDay } from './FoodLogsGroupedByDay';
@@ -5,9 +6,10 @@ import { FoodLogsGroupedByDay } from './FoodLogsGroupedByDay';
 interface FoodTrackerProps {
 	onAddEntry: () => void;
 	onEditEntry: (entry: FoodLog) => void;
+	onOpenPersonalDetails: () => void;
 }
 
-export function FoodTracker({ onAddEntry, onEditEntry }: FoodTrackerProps) {
+export function FoodTracker({ onAddEntry, onEditEntry, onOpenPersonalDetails }: FoodTrackerProps) {
 	const { foodLogs, removeFoodLog } = useFoodLogs();
 
 	return (
@@ -22,6 +24,16 @@ export function FoodTracker({ onAddEntry, onEditEntry }: FoodTrackerProps) {
 					<li>
 						<button type="button" onClick={onAddEntry}>
 							Add Food Log Entry
+						</button>
+					</li>
+					<li>
+						<button
+							type="button"
+							onClick={onOpenPersonalDetails}
+							style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+						>
+							<User size={18} />
+							Personal Details
 						</button>
 					</li>
 				</ul>

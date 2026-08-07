@@ -3,13 +3,17 @@ export function createDb<T>(key: string, defaultData: T, reviver?: (key: string,
 		data: defaultData,
 
 		read() {
-			const stored = localStorage.getItem(key);
-			this.data = stored ? JSON.parse(stored, reviver) : defaultData;
+			if (typeof window !== 'undefined') {
+				const stored = localStorage.getItem(key);
+				this.data = stored ? JSON.parse(stored, reviver) : defaultData;
+			}
 		},
 
 		update(fn: (data: T) => void) {
 			fn(this.data);
-			localStorage.setItem(key, JSON.stringify(this.data));
+			if (typeof window !== 'undefined') {
+				localStorage.setItem(key, JSON.stringify(this.data));
+			}
 		},
 	};
 

@@ -1,3 +1,5 @@
 - FoodsProvider (context/foods.tsx): loads ~95k USDA food entries from /foods.json (CDN), no built-in search
 - FoodLogsProvider (context/foodLogs.tsx): manages FoodLog[] in localStorage, provides { foodLogs, addFoodLog, removeFoodLog }
+- SettingsProvider (context/settings.tsx): manages Settings in localStorage, provides { settings, updateSettings }
+- TrainingDaysLogProvider (context/trainingDaysLog.tsx): manages TrainingDayLog[] in localStorage, provides { trainingDaysLog, addTrainingDayLog, removeTrainingDayLog }
 - Storage via createDb utility: generic localStorage-backed store with .read(), .update(), .data

@@ -1,4 +1,9 @@
+import { Check, type LucideIcon, Minus, TrendingUp, X } from 'lucide-preact';
 import { useState } from 'preact/hooks';
+import { useSettings } from '@/context/settings';
+import { useTrainingScheduleBaseline } from '@/context/training-schedule-baseline';
+import { useTrainingDaysLog } from '@/context/trainingDaysLog';
+import { trainingAndMacronutritionOnDay } from '@/models/trainingAndMacronutritionSchedule';
 import type { FoodLog } from '@/types';
 import { aggregateMacronutrients, formatNumber } from '@/utils';
 import { FoodLogsGroupedByTime } from './FoodLogsGroupedByTime';
@@ -16,6 +21,34 @@ function formatDay(dayKey: string): string {
 	return date.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
 }
 
+type MacroStatus = 'none' | 'wellUnder' | 'closeUnder' | 'above';
+
+function getMacroStatus(actual: number, target: number): MacroStatus {
+	if (actual === 0) return 'none';
+	if (actual > target) return 'above';
+	if (actual >= target * 0.9) return 'closeUnder';
+	return 'wellUnder';
+}
+
+const STATUS_STYLE: Record<MacroStatus, { icon: LucideIcon; color: string }> = {
+	none: { icon: Minus, color: 'var(--pico-muted-color)' },
+	above: { icon: X, color: '#dc2626' },
+	closeUnder: { icon: TrendingUp, color: '#d38123' },
+	wellUnder: { icon: Check, color: '#16a34a' },
+};
+
+function MacroCell({ value, unit, target }: { value: number; unit: string; target?: number }) {
+	const status = target != null ? getMacroStatus(value, target) : null;
+	const { icon: Icon, color } = status ? STATUS_STYLE[status] : { icon: null, color: undefined };
+	return (
+		<td data-tooltip={target != null ? `Target: ${formatNumber(target)}${unit}` : undefined}>
+			{Icon && <Icon size={14} color={color} />}
+			{formatNumber(value)}
+			{unit}
+		</td>
+	);
+}
+
 export function FoodLogsGroupedByDay({
 	foodLogs,
 	onDelete,
@@ -27,6 +60,10 @@ export function FoodLogsGroupedByDay({
 	onEdit: (entry: FoodLog) => void;
 	visibilityDays: number;
 }) {
+	const { settings } = useSettings();
+	const { trainingDaysLog } = useTrainingDaysLog();
+	const trainingScheduleBaseline = useTrainingScheduleBaseline();
+
 	const grouped = foodLogs.reduce(
 		(acc, foodLog) => {
 			const dayKey = getDayKey(foodLog.datetime);
@@ -82,6 +119,19 @@ export function FoodLogsGroupedByDay({
 							const isCollapsed = collapsedDays.has(dayKey);
 							const macronutrients = aggregateMacronutrients(items);
 
+							const [year, month, day] = dayKey.split('-').map(Number);
+							const dayDate = new Date(year, month - 1, day);
+							const schedule =
+								settings.trainingStartDate && trainingScheduleBaseline
+									? trainingAndMacronutritionOnDay({
+											settings,
+											trainingDayLog: trainingDaysLog,
+											date: dayDate,
+											trainingScheduleBaseline,
+										})
+									: null;
+							const targets = schedule?.macronutritionGoals ?? null;
+
 							return (
 								<>
 									<tr key={`header-${dayKey}`} class="group-header" onClick={() => toggleDay(dayKey)}>
@@ -91,10 +141,10 @@ export function FoodLogsGroupedByDay({
 										<td colSpan={4} style="text-align: right; font-size: 0.9em; font-weight: normal;">
 											<strong style="font-weight: 600; float: left;">{label}</strong>
 										</td>
-										<td>{macronutrients.calories}kCal</td>
-										<td>{formatNumber(macronutrients.protein)}g</td>
-										<td>{formatNumber(macronutrients.fat)}g</td>
-										<td>{formatNumber(macronutrients.carbs)}g</td>
+										<MacroCell value={macronutrients.calories} unit="kCal" target={targets?.calories} />
+										<MacroCell value={macronutrients.protein} unit="g" target={targets?.protein} />
+										<MacroCell value={macronutrients.fat} unit="g" target={targets?.fat} />
+										<MacroCell value={macronutrients.carbs} unit="g" target={targets?.carbs} />
 									</tr>
 									{!isCollapsed && <FoodLogsGroupedByTime foodLogs={items} onDelete={onDelete} onEdit={onEdit} />}
 								</>

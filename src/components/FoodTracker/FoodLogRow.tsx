@@ -34,10 +34,10 @@ export function FoodLogRow({
 			<td>
 				{amount.amount} {amount.unit}
 			</td>
-			<td>{macronutrients.calories}kCal</td>
-			<td>{macronutrients.protein}g</td>
-			<td>{macronutrients.fat}g</td>
-			<td>{macronutrients.carbs}g</td>
+			<td class="pd-5">{macronutrients.calories}kCal</td>
+			<td class="pd-5">{macronutrients.protein}g</td>
+			<td class="pd-5">{macronutrients.fat}g</td>
+			<td class="pd-5">{macronutrients.carbs}g</td>
 		</tr>
 	);
 }

@@ -6,18 +6,38 @@
 	"hooks": {
 		"PostToolUse": [
 			{
-				"matcher": "Write|Edit",
+				"matcher": "Write",
 				"hooks": [
 					{
 						"type": "command",
 						"command": "npm run format",
 						"statusMessage": "Formatting code..."
+					},
+					{
+						"type": "command",
+						"command": "npm run check",
+						"statusMessage": "Checking code..."
+					},
+					{
+						"type": "command",
+						"command": "npx tsc --noEmit",
+						"statusMessage": "Validating TypeScript..."
 					}
 				]
 			},
 			{
-				"matcher": "Write|Edit",
+				"matcher": "Edit",
 				"hooks": [
+					{
+						"type": "command",
+						"command": "npm run format",
+						"statusMessage": "Formatting code..."
+					},
+					{
+						"type": "command",
+						"command": "npm run check",
+						"statusMessage": "Checking code..."
+					},
 					{
 						"type": "command",
 						"command": "npx tsc --noEmit",

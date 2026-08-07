@@ -1,4 +1,7 @@
 - Food: { source, id, name, calories, protein, fat, carbs, sugar? }
 - FoodLog: created via FoodLogModel(datetime, food, amount) factory, contains macronutrients (computed)
 - FoodLogAmount: { unit: Unit, amount: number }
+- Settings: { trainingStartDate?: Date, weightKg?: number, bodyFatPercentage?: number }
+- TrainingDayLog: { id, datetime, type: 'SKIPPED' }
+- MacronutrientGoals: created via MacronutrientGoalsModel(settings) factory; calculates daily calorie and macro targets based on weight and body fat percentage
 - More at `src/types.ts`

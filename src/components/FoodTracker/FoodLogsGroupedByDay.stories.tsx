@@ -1,10 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/preact-vite';
+import type { JSX } from 'preact';
+import { SettingsProvider } from '@/context/settings';
+import { TrainingDaysLogProvider } from '@/context/trainingDaysLog';
+import { TrainingScheduleBaselineProvider } from '@/context/training-schedule-baseline';
 import { FoodLogModel } from '@/models/foodLog';
 import { FoodLogsGroupedByDay } from './FoodLogsGroupedByDay';
 
 const meta = {
 	title: 'Components/FoodLogsGroupedByDay',
 	component: FoodLogsGroupedByDay,
+	decorators: [
+		(Story): JSX.Element => (
+			<SettingsProvider>
+				<TrainingDaysLogProvider>
+					<TrainingScheduleBaselineProvider>
+						<Story />
+					</TrainingScheduleBaselineProvider>
+				</TrainingDaysLogProvider>
+			</SettingsProvider>
+		),
+	],
 } satisfies Meta<typeof FoodLogsGroupedByDay>;
 
 export default meta;

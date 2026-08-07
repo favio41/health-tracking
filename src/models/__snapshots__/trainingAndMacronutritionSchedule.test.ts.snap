@@ -1,0 +1,422 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`trainingAndMacronutritionSchedule > trainingAndMacronutritionSchedule > should return training logs 1`] = `
+[
+  {
+    "date": 2026-07-27T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-28T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-29T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-30T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "1",
+  },
+  {
+    "date": 2026-07-31T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "2",
+  },
+  {
+    "date": 2026-08-01T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+  {
+    "date": 2026-08-02T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "3",
+  },
+]
+`;
+
+exports[`trainingAndMacronutritionSchedule > trainingAndMacronutritionSchedule > should return training logs 2`] = `
+[
+  {
+    "date": 2026-08-24T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "3",
+  },
+  {
+    "date": 2026-08-25T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+  {
+    "date": 2026-08-26T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+  {
+    "date": 2026-08-27T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "1",
+  },
+  {
+    "date": 2026-08-28T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "2",
+  },
+  {
+    "date": 2026-08-29T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "OFF",
+  },
+  {
+    "date": 2026-08-30T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "3",
+  },
+]
+`;
+
+exports[`trainingAndMacronutritionSchedule > trainingAndMacronutritionSchedule > should return training logs with skipped days 1`] = `
+[
+  {
+    "date": 2026-07-27T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-28T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-29T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-30T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "1",
+  },
+  {
+    "date": 2026-07-31T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "SKIPPED",
+    "training": undefined,
+  },
+  {
+    "date": 2026-08-01T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "2",
+  },
+  {
+    "date": 2026-08-02T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+]
+`;
+
+exports[`trainingAndMacronutritionSchedule > trainingAndMacronutritionSchedule > should return training logs with skipped days 2`] = `
+[
+  {
+    "date": 2026-08-24T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "1",
+  },
+  {
+    "date": 2026-08-25T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "3",
+  },
+  {
+    "date": 2026-08-26T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+  {
+    "date": 2026-08-27T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+  {
+    "date": 2026-08-28T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "1",
+  },
+  {
+    "date": 2026-08-29T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "2",
+  },
+  {
+    "date": 2026-08-30T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "OFF",
+  },
+]
+`;
+
+exports[`trainingAndMacronutritionSchedule > trainingAndMacronutritionSchedule > should return training logs with skipped days and macronutrientGoals 1`] = `
+[
+  {
+    "date": 2026-07-27T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-28T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-29T00:00:00.000Z,
+    "macronutritionGoals": null,
+    "nutrition": "16/8",
+    "phase": undefined,
+    "status": "BEFORE_START_DATE",
+    "training": undefined,
+  },
+  {
+    "date": 2026-07-30T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2099,
+      "carbs": 30,
+      "fat": 167,
+      "protein": 120,
+    },
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "1",
+  },
+  {
+    "date": 2026-07-31T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 1899,
+      "carbs": 0,
+      "fat": 164,
+      "protein": 105,
+    },
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "SKIPPED",
+    "training": undefined,
+  },
+  {
+    "date": 2026-08-01T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2099,
+      "carbs": 30,
+      "fat": 167,
+      "protein": 120,
+    },
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "2",
+  },
+  {
+    "date": 2026-08-02T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2099,
+      "carbs": 30,
+      "fat": 167,
+      "protein": 120,
+    },
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+]
+`;
+
+exports[`trainingAndMacronutritionSchedule > trainingAndMacronutritionSchedule > should return training logs with skipped days and macronutrientGoals 2`] = `
+[
+  {
+    "date": 2026-08-24T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2099,
+      "carbs": 100,
+      "fat": 135,
+      "protein": 120,
+    },
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "1",
+  },
+  {
+    "date": 2026-08-25T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2099,
+      "carbs": 100,
+      "fat": 135,
+      "protein": 120,
+    },
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "3",
+  },
+  {
+    "date": 2026-08-26T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2099,
+      "carbs": 100,
+      "fat": 135,
+      "protein": 120,
+    },
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+  {
+    "date": 2026-08-27T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2099,
+      "carbs": 100,
+      "fat": 135,
+      "protein": 120,
+    },
+    "nutrition": "16/8",
+    "phase": "prime",
+    "status": "OK",
+    "training": "OFF",
+  },
+  {
+    "date": 2026-08-28T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2199,
+      "carbs": 112,
+      "fat": 128,
+      "protein": 150,
+    },
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "1",
+  },
+  {
+    "date": 2026-08-29T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2199,
+      "carbs": 112,
+      "fat": 128,
+      "protein": 150,
+    },
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "2",
+  },
+  {
+    "date": 2026-08-30T00:00:00.000Z,
+    "macronutritionGoals": {
+      "calories": 2199,
+      "carbs": 112,
+      "fat": 128,
+      "protein": 150,
+    },
+    "nutrition": "16/8",
+    "phase": "adapt",
+    "status": "OK",
+    "training": "OFF",
+  },
+]
+`;

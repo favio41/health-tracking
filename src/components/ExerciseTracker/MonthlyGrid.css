@@ -1,0 +1,45 @@
+.week-grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	/* gap: 1rem; */
+	padding: 1rem 0;
+}
+
+.week-grid-header {
+	font-weight: bold;
+	text-align: center;
+	padding: 0.5rem;
+}
+
+.week-grid-cell {
+	border: 1px solid var(--pico-muted-border-color);
+	border-radius: 0.25rem;
+	padding: 1rem;
+	min-height: 100px;
+	background-color: var(--pico-element-background-color);
+	text-align: center;
+}
+
+.week-grid-cell small.phase {
+	color: var(--pico-muted-color);
+	font-size: 0.75em;
+}
+
+.week-grid-cell.TODAY {
+	border-color: var(--pico-primary-border);
+}
+
+.week-grid-cell.SKIPPED p,
+.week-grid-cell.OFF p {
+	color: var(--pico-secondary);
+	font-size: 0.775em;
+}
+
+.week-grid-cell.OK p,
+.week-grid-cell.AFTER_TODAY p {
+	font-size: 0.775em;
+}
+
+.week-grid-cell .phase {
+	text-transform: uppercase;
+}
