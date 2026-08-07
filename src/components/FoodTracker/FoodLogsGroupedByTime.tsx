@@ -67,7 +67,7 @@ export function FoodLogsGroupedByTime({
 
 				return (
 					<Fragment key={group}>
-						<tr class="group-header" onClick={() => toggleMeal(group)}>
+						<tr className="group-header" onClick={() => toggleMeal(group)}>
 							<td></td>
 							<td>
 								<span class={`group-toggle${isCollapsed ? ' collapsed' : ''}`}>⏷</span>

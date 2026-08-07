@@ -48,7 +48,7 @@ export function ExerciseTracker({ onAddEntry }: ExerciseTrackerProps) {
 
 function TrainingDayStartDateEmptyNotice({ setIsDateDialogOpen }: { setIsDateDialogOpen: (value: boolean) => void }) {
 	return (
-		<div class="text-center my-20">
+		<div className="text-center my-20">
 			<p>No training start date set. Configure your settings to begin tracking!</p>
 			<button type="button" onClick={() => setIsDateDialogOpen(true)}>
 				Set Training Start Date

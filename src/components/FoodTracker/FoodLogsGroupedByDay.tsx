@@ -99,7 +99,7 @@ export function FoodLogsGroupedByDay({
 
 	return (
 		<>
-			<div class="table-container">
+			<div className="table-container">
 				<table>
 					<thead>
 						<tr>
@@ -134,7 +134,7 @@ export function FoodLogsGroupedByDay({
 
 							return (
 								<>
-									<tr key={`header-${dayKey}`} class="group-header" onClick={() => toggleDay(dayKey)}>
+									<tr key={`header-${dayKey}`} className="group-header" onClick={() => toggleDay(dayKey)}>
 										<td>
 											<span class={`group-toggle${isCollapsed ? ' collapsed' : ''}`}>⏷</span>
 										</td>

@@ -19,7 +19,7 @@ export function FoodLogRow({
 	};
 
 	return (
-		<tr class="group-row">
+		<tr className="group-row">
 			<td></td>
 			<td className="action">
 				<button type="button" onClick={() => onEdit(entry)} title="Edit">
@@ -34,10 +34,10 @@ export function FoodLogRow({
 			<td>
 				{amount.amount} {amount.unit}
 			</td>
-			<td class="pd-5">{macronutrients.calories}kCal</td>
-			<td class="pd-5">{macronutrients.protein}g</td>
-			<td class="pd-5">{macronutrients.fat}g</td>
-			<td class="pd-5">{macronutrients.carbs}g</td>
+			<td className="pd-5">{macronutrients.calories}kCal</td>
+			<td className="pd-5">{macronutrients.protein}g</td>
+			<td className="pd-5">{macronutrients.fat}g</td>
+			<td className="pd-5">{macronutrients.carbs}g</td>
 		</tr>
 	);
 }

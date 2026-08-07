@@ -14,7 +14,7 @@ export function Navigation({ setImportExportDialogOpen }: HeaderProps) {
 			</ul>
 			<ul>
 				<li>
-					<button type="button" class="secondary" onClick={() => setImportExportDialogOpen(true)}>
+					<button type="button" className="secondary" onClick={() => setImportExportDialogOpen(true)}>
 						Export/Import Log
 					</button>
 				</li>

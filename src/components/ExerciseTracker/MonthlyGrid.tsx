@@ -30,9 +30,9 @@ export function MonthlyGrid() {
 
 	return (
 		<>
-			<div class="week-grid">
+			<div className="week-grid">
 				{DAYS_OF_WEEK.map((day) => (
-					<div key={day} class="week-grid-header">
+					<div key={day} className="week-grid-header">
 						{day}
 					</div>
 				))}
@@ -48,7 +48,7 @@ export function MonthlyGrid() {
 								}
 							}}
 						>
-							<small class="phase" style="text-transform:capitalize">
+							<small className="phase" style="text-transform:capitalize">
 								{dayjs(item.date).format('ddd, MMM DD')}
 							</small>
 							<Cell item={item}></Cell>
@@ -68,7 +68,7 @@ function Cell({ item }: { item: ScheduleGrid }) {
 	if (item.status === 'SKIPPED') {
 		return (
 			<div className={item.phase}>
-				<small class="phase">{item.phase}</small>
+				<small className="phase">{item.phase}</small>
 				<p>Skipped</p>
 			</div>
 		);
@@ -76,7 +76,7 @@ function Cell({ item }: { item: ScheduleGrid }) {
 
 	return (
 		<div className={item.phase}>
-			<small class="phase">{item.phase}</small>
+			<small className="phase">{item.phase}</small>
 			{item.training && item.training !== 'OFF' && item.training !== 'CARDIO' && <p>workout #{item.training}</p>}
 			{(item.training === 'OFF' || item.training === 'CARDIO') && <p>{item.training}</p>}
 		</div>
